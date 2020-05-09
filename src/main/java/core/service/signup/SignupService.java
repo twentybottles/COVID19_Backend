@@ -1,5 +1,7 @@
 package core.service.signup;
 
+import java.util.Date;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -20,7 +22,7 @@ public class SignupService {
     	entity.setFirstname("riki");
     	entity.setLastname("nakajima");
     	entity.setPassword("riki0033");
-    
+    	
     	register.save(entity);
     	return true;
     }
