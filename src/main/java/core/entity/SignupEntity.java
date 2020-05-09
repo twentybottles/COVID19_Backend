@@ -8,8 +8,6 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 import lombok.Data;
-import lombok.Getter;
-import lombok.Setter;
 
 @Entity
 @Table(name = "MEMBER_INFORMATION")
@@ -25,7 +23,7 @@ public class SignupEntity {
     private String firstname;
     @Column(name = "lastname")
     private String lastname;
-    @Column(name = "password")
+	@Column(name = "password")
     private String password;
 
     @Override
