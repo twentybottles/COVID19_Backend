@@ -12,7 +12,11 @@ public class SignupRegisterService {
     @Autowired
     private SignupRepository repository;
     
-    public void save(SignupEntity entity) {
+    public boolean save(SignupEntity entity) {
         this.repository.save(entity);
+        
+        // 登録成功したらtrue or false
+        
+        return true;
     }
 }

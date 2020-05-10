@@ -6,22 +6,40 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.demo.entity.SignupEntity;
-import com.example.demo.service.signup.SignupService;
+import com.example.demo.service.signup.SignupRegisterService;
+import com.example.demo.service.signup.SignupSearchService;
+import static com.example.demo.common.WebConst.SIGNUP_SEARCH_URL;
+import static com.example.demo.common.WebConst.SIGNUP_REGISTER_URL;
 
 @RestController
-@RequestMapping("/signup")
 public class SignupController {
 	
    @Autowired
-   private SignupService signupService;
+   private SignupRegisterService signupRegister;
    
-   @RequestMapping(method = RequestMethod.POST)
-   public String addAuthenticatable(SignupEntity signupEntity){
+   @Autowired
+   private SignupSearchService signupSearch;
+   
+   
+   @RequestMapping(path = SIGNUP_SEARCH_URL, method = RequestMethod.POST)
+   public boolean signupSearch(String emailAddress){
        
-	   signupService.register(signupEntity);
+	   return signupSearch.select(emailAddress);
 	   
-	   return "OK";
+   }
+   
+   @RequestMapping(path = SIGNUP_REGISTER_URL, method = RequestMethod.POST)
+   public boolean signupRegister(SignupEntity signupEntity){
+       
+	   // 画面から値を受け取ったことを想定して一旦は値をセット
+	   signupEntity.setEmailAddress("riki.nakajima4@gmail.com");
+	   signupEntity.setFirstname("riki");
+	   signupEntity.setLastname("nakajima");
+	   signupEntity.setPassword("aaaabbbb");
+	   
+	   return signupRegister.save(signupEntity);
 
    }
+   
 
 }

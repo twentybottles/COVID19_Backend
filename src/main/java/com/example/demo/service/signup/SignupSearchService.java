@@ -15,13 +15,11 @@ public class SignupSearchService {
     @Autowired
     private SignupRepository repository;
     
-    public boolean find(String emailAddress) {
-        this.repository.findAll();
-        return true;
-    }
-    
-	public List<SignupEntity> select(@RequestParam("emailAddress") String emailAddress) {
+	public boolean select(@RequestParam("emailAddress") String emailAddress) {
 		List<SignupEntity> list = repository.findById(emailAddress);
-		return list;
+		
+		// メールアドレスがダブってたらtrue/false
+		
+		return true;
 	}
 }
