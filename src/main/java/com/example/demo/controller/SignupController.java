@@ -31,12 +31,6 @@ public class SignupController {
    @RequestMapping(path = SIGNUP_REGISTER_URL, method = RequestMethod.POST)
    public boolean signupRegister(SignupEntity signupEntity){
        
-	   // 画面から値を受け取ったことを想定して一旦は値をセット
-	   signupEntity.setEmailAddress("riki.nakajima4@gmail.com");
-	   signupEntity.setFirstname("riki");
-	   signupEntity.setLastname("nakajima");
-	   signupEntity.setPassword("aaaabbbb");
-	   
 	   return signupRegister.save(signupEntity);
 
    }
