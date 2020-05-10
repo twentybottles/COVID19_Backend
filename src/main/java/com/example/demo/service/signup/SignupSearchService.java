@@ -1,4 +1,4 @@
-package core.service.signup;
+package com.example.demo.service.signup;
 
 import java.util.List;
 
@@ -6,8 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import core.entity.SignupEntity;
-import core.repository.SignupRepository;
+import com.example.demo.entity.SignupEntity;
+import com.example.demo.repository.SignupRepository;
 
 @Service
 public class SignupSearchService {

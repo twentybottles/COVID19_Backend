@@ -1,11 +1,9 @@
-package core.service.signup;
-
-import java.util.Date;
+package com.example.demo.service.signup;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import core.entity.SignupEntity;
+import com.example.demo.entity.SignupEntity;
 
 @Service
 public class SignupService {
@@ -18,10 +16,10 @@ public class SignupService {
 
     public boolean register(SignupEntity entity) {
     	
-//    	entity.setEmailAddress("riki.nakajima2@gmail.com");
-//    	entity.setFirstname("riki");
-//    	entity.setLastname("nakajima");
-//    	entity.setPassword("riki0033");
+    	entity.setEmailAddress("riki.nakajima3@gmail.com");
+    	entity.setFirstname("riki");
+    	entity.setLastname("nakajima");
+    	entity.setPassword("riki0033");
     	
     	register.save(entity);
     	return true;

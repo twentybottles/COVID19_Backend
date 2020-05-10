@@ -1,10 +1,10 @@
-package core.service.signup;
+package com.example.demo.service.signup;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import core.entity.SignupEntity;
-import core.repository.SignupRepository;
+import com.example.demo.entity.SignupEntity;
+import com.example.demo.repository.SignupRepository;
 
 @Service
 public class SignupRegisterService {
