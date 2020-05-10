@@ -18,10 +18,10 @@ public class SignupService {
 
     public boolean register(SignupEntity entity) {
     	
-    	entity.setEmailAddress("riki.nakajima@gmail.com");
-    	entity.setFirstname("riki");
-    	entity.setLastname("nakajima");
-    	entity.setPassword("riki0033");
+//    	entity.setEmailAddress("riki.nakajima2@gmail.com");
+//    	entity.setFirstname("riki");
+//    	entity.setLastname("nakajima");
+//    	entity.setPassword("riki0033");
     	
     	register.save(entity);
     	return true;
