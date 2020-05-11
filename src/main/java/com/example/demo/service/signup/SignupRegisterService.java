@@ -13,7 +13,8 @@ public class SignupRegisterService {
     private SignupRepository repository;
     
     public boolean save(SignupEntity entity) {
-        this.repository.save(entity);
+        
+    	 this.repository.save(entity);
         
         // 登録成功したらtrue or false
         
