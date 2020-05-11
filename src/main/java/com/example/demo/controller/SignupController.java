@@ -1,6 +1,7 @@
 package com.example.demo.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
@@ -29,14 +30,8 @@ public class SignupController {
    }
    
    @RequestMapping(path = SIGNUP_REGISTER_URL, method = RequestMethod.POST)
-   public boolean signupRegister(SignupEntity signupEntity){
+   public boolean signupRegister(@RequestBody SignupEntity signupEntity){
        
-	   // 画面から値を受け取ったことを想定して一旦は値をセット
-	   signupEntity.setEmailAddress("riki.nakajima4@gmail.com");
-	   signupEntity.setFirstname("riki");
-	   signupEntity.setLastname("nakajima");
-	   signupEntity.setPassword("aaaabbbb");
-	   
 	   return signupRegister.save(signupEntity);
 
    }
