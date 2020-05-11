@@ -1,6 +1,7 @@
 package com.example.demo.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
@@ -29,7 +30,7 @@ public class SignupController {
    }
    
    @RequestMapping(path = SIGNUP_REGISTER_URL, method = RequestMethod.POST)
-   public boolean signupRegister(SignupEntity signupEntity){
+   public boolean signupRegister(@RequestBody SignupEntity signupEntity){
        
 	   return signupRegister.save(signupEntity);
 
