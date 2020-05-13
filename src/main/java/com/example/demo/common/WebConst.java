@@ -6,11 +6,7 @@ package com.example.demo.common;
 public interface WebConst {
 
     /** ---- URLs ---- **/
-    String HOME_URL = "/";
-
-    String ERROR_URL = "/error";
-
-    String LOGOUT_URL = "/logout";
+    String LOGIN_AUTHENTICATION_URL = "/loginAuthentication";
 
     String SIGNUP_SEARCH_URL = "/signupSearch";
 
