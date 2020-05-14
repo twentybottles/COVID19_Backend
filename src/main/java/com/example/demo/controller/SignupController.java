@@ -7,8 +7,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.demo.entity.SignupEntity;
-import com.example.demo.service.signup.SignupRegisterService;
-import com.example.demo.service.signup.SignupSearchService;
+import com.example.demo.service.SignupRegisterService;
+import com.example.demo.service.SignupSearchService;
 import static com.example.demo.common.WebConst.SIGNUP_SEARCH_URL;
 import static com.example.demo.common.WebConst.SIGNUP_REGISTER_URL;
 

@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.demo.entity.LoginEntity;
-import com.example.demo.service.login.LoginService;
+import com.example.demo.service.LoginService;
 
 @RestController
 public class LoginController {
