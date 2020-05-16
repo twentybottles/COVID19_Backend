@@ -19,5 +19,11 @@ public class LoginEntity {
     private String myUsername;
 	@Column(name = "password")
     private String myPassword;
+    @Column(name = "firstname")
+    private String firstname;
+    @Column(name = "lastname")
+    private String lastname;
+	
+	
 	
 }

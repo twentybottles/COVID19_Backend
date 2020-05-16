@@ -1,6 +1,6 @@
 package com.example.demo.controller;
 
-import static com.example.demo.common.WebConst.SEARCH_COVID_URL;
+import static com.example.demo.common.WebConst.COVID_SEARCH_SUMMARY_URL;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -16,7 +16,7 @@ public class SerachCovidController {
    @Autowired
    private SearchCovidService searchCovid;
    
-   @RequestMapping(path = SEARCH_COVID_URL, method = RequestMethod.GET)
+   @RequestMapping(path = COVID_SEARCH_SUMMARY_URL, method = RequestMethod.GET)
    public CovidSummaryEntity searchCovidSummary(){
        
 	   return searchCovid.searchCovidSummary();
