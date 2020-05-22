@@ -35,6 +35,5 @@ public class SignupController {
 	   return signupRegister.save(signupEntity);
 
    }
-   
 
 }
