@@ -1,4 +1,4 @@
-package com.example.demo.service.signup;
+package com.example.demo.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -13,7 +13,8 @@ public class SignupRegisterService {
     private SignupRepository repository;
     
     public boolean save(SignupEntity entity) {
-        this.repository.save(entity);
+        
+    	 this.repository.save(entity);
         
         // 登録成功したらtrue or false
         
