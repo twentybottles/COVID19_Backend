@@ -10,21 +10,28 @@ import javax.persistence.Table;
 import lombok.Data;
 
 @Entity
-@Table(name = "MEMBER_INFORMATION")
+@Table(name = "USER")
 @Data
-public class SignupEntity {
+public class UserEntity {
 
-    @Id
+	@Id
     @GeneratedValue(strategy=GenerationType.IDENTITY)
     @Column(name = "id")
     private Long id;
-    @Column(name = "email_address")
-    private String emailAddress;
+	
     @Column(name = "firstname")
     private String firstname;
+    
     @Column(name = "lastname")
     private String lastname;
+    
+    @Column(name = "email")
+    private String email;
+    
 	@Column(name = "password")
-    private String password;		
+    private String password;
 	
+    @Column(name = "admin_flag")
+    private boolean admin;
+
 }

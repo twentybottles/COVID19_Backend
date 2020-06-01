@@ -1,23 +1,34 @@
 package com.example.demo.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+import com.example.demo.entity.UserEntity;
+import com.example.demo.repository.LoginRepository;
+import static com.example.demo.common.WebConst.BCRYPT_LENGTH;
 
-import com.example.demo.entity.SignupEntity;
-import com.example.demo.repository.SignupRepository;
 
 @Service
 public class SignupRegisterService {
 
     @Autowired
-    private SignupRepository repository;
+    private LoginRepository userRepository;
     
-    public boolean save(SignupEntity entity) {
-        
-    	 this.repository.save(entity);
-        
-        // 登録成功したらtrue or false
-        
-        return true;
+    @Transactional
+    public UserEntity register(UserEntity userEntity) {
+    	
+    	PasswordEncoder encoder = new BCryptPasswordEncoder();   	
+    	
+    	if (userEntity.getPassword().length() < BCRYPT_LENGTH) {
+    		
+        	userEntity.setPassword(encoder.encode(userEntity.getPassword()));
+        	
+    	}
+    		
+    	return userRepository.save(userEntity);
+    	
     }
+    
 }
