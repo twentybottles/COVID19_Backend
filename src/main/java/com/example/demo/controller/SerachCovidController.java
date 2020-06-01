@@ -1,7 +1,7 @@
 package com.example.demo.controller;
 
-import static com.example.demo.common.WebConst.COVID_SEARCH_SUMMARY_URL;
 import static com.example.demo.common.WebConst.COVID_SEARCH_COUNTRY_URL;
+import static com.example.demo.common.WebConst.COVID_SEARCH_SUMMARY_URL;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;

@@ -15,14 +15,15 @@ public class SearchCovidService {
     public CovidSummaryEntity searchCovidSummary() {
     	
     	RestTemplate restTemplate = new RestTemplate();
+    	
     	return restTemplate.getForObject(COVID19_API_SUMMARY_URL, CovidSummaryEntity.class);
 
     }
-    
 
     public CovidCountryEntity[] searchCovidCountry(String countrySlug) {
     	
     	RestTemplate restTemplate = new RestTemplate();
+    	
     	return restTemplate.getForObject(COVID19_API_TOTAL_COUNTRY_URL + countrySlug, CovidCountryEntity[].class);
 
     }
