@@ -13,10 +13,10 @@ public class SignupSearchService {
     private UserRepository repository;
     
     @Transactional
-	public boolean existsByUsername(String email) {
+	public boolean existsByUsername(String username) {
 		
-		return repository.existsByUsername(email);
+		return repository.existsByUsername(username);
 			
 	}
-	
+
 }

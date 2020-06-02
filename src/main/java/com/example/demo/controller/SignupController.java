@@ -1,7 +1,7 @@
 package com.example.demo.controller;
 
 import static com.example.demo.common.WebConst.SIGNUP_REGISTER_URL;
-import static com.example.demo.common.WebConst.SIGNUP_SEARCH_URL;
+import static com.example.demo.common.WebConst.SIGNUP_SEARCH_USERNAME_URL;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -13,7 +13,6 @@ import com.example.demo.entity.UserEntity;
 import com.example.demo.service.SignupRegisterService;
 import com.example.demo.service.SignupSearchService;
 
-
 @RestController
 public class SignupController {
 
@@ -23,8 +22,8 @@ public class SignupController {
    @Autowired
    private SignupSearchService signupSearch;   
    
-   @RequestMapping(path = SIGNUP_SEARCH_URL, method = RequestMethod.POST)
-   public boolean signupSearch(@RequestBody String username){
+   @RequestMapping(path = SIGNUP_SEARCH_USERNAME_URL, method = RequestMethod.POST)
+   public boolean signupSearchUsername(@RequestBody String username){
        	   
 	   return signupSearch.existsByUsername(username);
 

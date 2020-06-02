@@ -10,7 +10,7 @@ public interface WebConst {
 
 	String LOGIN_SEARCH_INFO_URL = "/login/search/userInfo";
 
-    String SIGNUP_SEARCH_URL = "/signup/search";
+    String SIGNUP_SEARCH_USERNAME_URL = "/signup/search/username";
 
     String SIGNUP_REGISTER_URL = "/signup/register";
 
@@ -29,5 +29,11 @@ public interface WebConst {
     /** ---- Defined Integer ---- **/
 
     int BCRYPT_LENGTH = 60;
+
+    /** ---- Defined ROLE ---- **/
     
+    String ROLE_ADMIN = "ROLE_ADMIN";
+    
+    String ROLE_USER = "ROLE_USER";
+
 }

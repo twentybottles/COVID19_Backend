@@ -8,8 +8,8 @@ import com.example.demo.entity.UserEntity;
 @Repository
 public interface UserRepository extends JpaRepository<UserEntity, Long> {
 	
-	public UserEntity findByUsername(String email);
+	public UserEntity findByUsername(String username);
 	
-	public boolean existsByUsername(String email);
+	public boolean existsByUsername(String username);
 	
 }
