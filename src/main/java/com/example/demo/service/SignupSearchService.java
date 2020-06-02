@@ -4,18 +4,18 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.example.demo.repository.LoginRepository;
+import com.example.demo.repository.UserRepository;
 
 @Service
 public class SignupSearchService {
 
     @Autowired
-    private LoginRepository repository;
+    private UserRepository repository;
     
     @Transactional
-	public boolean existsByEmail(String email) {
+	public boolean existsByUsername(String email) {
 		
-		return repository.existsByEmail(email);
+		return repository.existsByUsername(email);
 			
 	}
 	

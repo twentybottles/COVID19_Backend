@@ -54,7 +54,7 @@ public class JsonUsernamePasswordAuthenticationFilter extends AbstractAuthentica
         } catch (IOException e) {
             requestObject = new HashMap<>();
         }
-
+        
         String username =
                 Optional
                         .ofNullable(requestObject.get(usernameParameter))
@@ -66,12 +66,13 @@ public class JsonUsernamePasswordAuthenticationFilter extends AbstractAuthentica
                         .ofNullable(requestObject.get(passwordParameter))
                         .map(Object::toString)
                         .orElse("");
-
+        
         UsernamePasswordAuthenticationToken authRequest = new UsernamePasswordAuthenticationToken(
                 username, password);
 
         authRequest.setDetails(authenticationDetailsSource.buildDetails(request));
-
+        
         return this.getAuthenticationManager().authenticate(authRequest);
+        
     }
 }

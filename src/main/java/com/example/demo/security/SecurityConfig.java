@@ -14,6 +14,7 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.authentication.HttpStatusEntryPoint;
+import org.springframework.security.web.authentication.SavedRequestAwareAuthenticationSuccessHandler;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.CorsConfigurationSource;
@@ -36,7 +37,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     	http
         // AUTHORIZE
         .authorizeRequests()
-        	.mvcMatchers("/authentication").permitAll()
+        	.mvcMatchers("/authentication").hasRole("USER")
         	.mvcMatchers("/login/search/**").permitAll()
         	.mvcMatchers("/signup/**").permitAll()
         	.mvcMatchers("/covid/search/**").permitAll()
@@ -46,6 +47,11 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         .cors()
             .configurationSource(this.corsConfigurationSource())
         ;
+    	
+    	SavedRequestAwareAuthenticationSuccessHandler successHandler = new SavedRequestAwareAuthenticationSuccessHandler();
+    	successHandler.setTargetUrlParameter("/login/search/id");
+    	successHandler.setDefaultTargetUrl("/login/search/id");
+    	successHandler.setAlwaysUseDefaultTargetUrl(true);
 
         JsonUsernamePasswordAuthenticationFilter jsonUsernamePasswordAuthenticationFilter =
             new JsonUsernamePasswordAuthenticationFilter(authenticationManager());
@@ -53,6 +59,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         jsonUsernamePasswordAuthenticationFilter.setPasswordParameter("password");
         jsonUsernamePasswordAuthenticationFilter
         	.setAuthenticationSuccessHandler((req, res, auth) -> {res.setStatus(HttpServletResponse.SC_OK);});
+        jsonUsernamePasswordAuthenticationFilter
+        	.setAuthenticationSuccessHandler(successHandler);
         jsonUsernamePasswordAuthenticationFilter
             .setAuthenticationFailureHandler((req, res, ex) -> res.setStatus(HttpServletResponse.SC_UNAUTHORIZED));
         http.addFilterAt(jsonUsernamePasswordAuthenticationFilter, UsernamePasswordAuthenticationFilter.class);

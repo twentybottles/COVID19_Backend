@@ -1,8 +1,5 @@
 package com.example.demo.common;
 
-/**
- * Constant definition
- */
 public interface WebConst {
 	
     /** ---- Function URLs ---- **/
@@ -11,7 +8,7 @@ public interface WebConst {
 	
 	String LOGIN_SEARCH_ID_URL = "/login/search/id";
 
-	String LOGIN_SEARCH_NAME_URL = "/login/search/name";
+	String LOGIN_SEARCH_INFO_URL = "/login/search/userInfo";
 
     String SIGNUP_SEARCH_URL = "/signup/search";
 
@@ -29,7 +26,7 @@ public interface WebConst {
     
     String COVID19_API_TOTAL_COUNTRY_URL = COVID19_API_COM_URL + "/total/country/";
 
-    /** ---- defined count ---- **/
+    /** ---- Defined Integer ---- **/
 
     int BCRYPT_LENGTH = 60;
     

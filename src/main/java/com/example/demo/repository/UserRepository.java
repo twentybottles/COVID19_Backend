@@ -6,10 +6,10 @@ import org.springframework.stereotype.Repository;
 import com.example.demo.entity.UserEntity;
 
 @Repository
-public interface LoginRepository extends JpaRepository<UserEntity, Long> {
+public interface UserRepository extends JpaRepository<UserEntity, Long> {
 	
-	public UserEntity findByEmail(String email);
+	public UserEntity findByUsername(String email);
 	
-	public boolean existsByEmail(String email);
+	public boolean existsByUsername(String email);
 	
 }

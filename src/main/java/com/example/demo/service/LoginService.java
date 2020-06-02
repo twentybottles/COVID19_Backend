@@ -7,16 +7,16 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.example.demo.entity.UserEntity;
-import com.example.demo.repository.LoginRepository;
+import com.example.demo.repository.UserRepository;
 
 @Service
 public class LoginService {
 
     @Autowired
-    private LoginRepository repository;
-    
+    private UserRepository repository;
+
     @Transactional
-    public Optional<UserEntity> searchName(long id) {
+    public Optional<UserEntity> searchUserInfo(long id) {
 		
 		return repository.findById(id);
 		
@@ -25,7 +25,7 @@ public class LoginService {
     @Transactional
 	public UserEntity authentication(String email) {
 						
-		return repository.findByEmail(email);
+		return repository.findByUsername(email);
 	
 	}
 	
