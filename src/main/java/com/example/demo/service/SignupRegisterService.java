@@ -16,7 +16,7 @@ public class SignupRegisterService {
     private UserRepository userRepository;
 
     @Transactional
-    public UserEntity register(UserEntity userEntity) {
+    public boolean register(UserEntity userEntity) {
     	
     	PasswordEncoder encoder = new BCryptPasswordEncoder();   	
     	
@@ -26,7 +26,9 @@ public class SignupRegisterService {
         	
     	}
 
-    	return userRepository.save(userEntity);
+    	userRepository.save(userEntity);
+    	
+    	return true;
     	
     }
     

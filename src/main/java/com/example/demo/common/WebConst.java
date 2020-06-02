@@ -14,6 +14,8 @@ public interface WebConst {
 
     String SIGNUP_REGISTER_URL = "/signup/register";
 
+    String SIGNUP_UPDATE_URL = "/signup/update";
+
     String COVID_SEARCH_SUMMARY_URL = "/covid/search/summary";
 
     String COVID_SEARCH_COUNTRY_URL = "/covid/search/country";

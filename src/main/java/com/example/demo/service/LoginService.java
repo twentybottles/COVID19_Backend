@@ -23,9 +23,9 @@ public class LoginService {
 	}
 
     @Transactional
-	public UserEntity authentication(String email) {
+	public UserEntity authentication(String username) {
 						
-		return repository.findByUsername(email);
+		return repository.findByUsername(username);
 	
 	}
 	
