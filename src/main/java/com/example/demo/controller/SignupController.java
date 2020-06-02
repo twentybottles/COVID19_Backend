@@ -24,19 +24,17 @@ public class SignupController {
    private SignupSearchService signupSearch;   
    
    @RequestMapping(path = SIGNUP_SEARCH_URL, method = RequestMethod.POST)
-   public boolean signupSearch(@RequestBody String email){
+   public boolean signupSearch(@RequestBody String username){
        	   
-	   return signupSearch.existsByEmail(email);
+	   return signupSearch.existsByUsername(username);
 
    }
    
    @RequestMapping(path = SIGNUP_REGISTER_URL, method = RequestMethod.POST)
    public boolean signupRegister(@RequestBody UserEntity userEntity){
-	   
-	   if (signupSearch.existsByEmail(userEntity.getEmail())) {return false;}
 
 	   signupRegister.register(userEntity);
-	   
+
 	   return true;
 
    }

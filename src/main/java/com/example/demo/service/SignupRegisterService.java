@@ -6,16 +6,15 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import com.example.demo.entity.UserEntity;
-import com.example.demo.repository.LoginRepository;
+import com.example.demo.repository.UserRepository;
 import static com.example.demo.common.WebConst.BCRYPT_LENGTH;
-
 
 @Service
 public class SignupRegisterService {
 
     @Autowired
-    private LoginRepository userRepository;
-    
+    private UserRepository userRepository;
+
     @Transactional
     public UserEntity register(UserEntity userEntity) {
     	
@@ -26,7 +25,7 @@ public class SignupRegisterService {
         	userEntity.setPassword(encoder.encode(userEntity.getPassword()));
         	
     	}
-    		
+
     	return userRepository.save(userEntity);
     	
     }

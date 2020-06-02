@@ -1,13 +1,10 @@
 package com.example.demo.controller;
 
-import static com.example.demo.common.WebConst.AUTHENTICATION_URL;
 import static com.example.demo.common.WebConst.LOGIN_SEARCH_ID_URL;
-import static com.example.demo.common.WebConst.LOGIN_SEARCH_NAME_URL;
-
+import static com.example.demo.common.WebConst.LOGIN_SEARCH_INFO_URL;
 import java.util.Optional;
-
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -22,21 +19,18 @@ public class LoginController {
    @Autowired
    private LoginService login;
    
-   @RequestMapping(path = LOGIN_SEARCH_NAME_URL, method = RequestMethod.GET)
-   public Optional<UserEntity> loginSearchName(@RequestParam(value = "id") long id){
+   @RequestMapping(path = LOGIN_SEARCH_INFO_URL, method = RequestMethod.GET)
+   public Optional<UserEntity> searchUserInfo(@RequestParam(value = "id") long id){
 
-	   return login.searchName(id);
+	   return login.searchUserInfo(id);
 	   
    }
 
-   @RequestMapping(path = LOGIN_SEARCH_ID_URL, method = RequestMethod.POST)
-   public UserEntity loginSearchId(@RequestBody String email){
+   @RequestMapping(path = LOGIN_SEARCH_ID_URL, method = RequestMethod.GET)
+   public UserEntity loginSearchId(@AuthenticationPrincipal UserEntity userEntity){
 
-	   return login.authentication(email);
+	   return userEntity;
 
    }
-
-   @RequestMapping(path = AUTHENTICATION_URL, method = RequestMethod.POST)
-   public void authentication(){}
 
 }

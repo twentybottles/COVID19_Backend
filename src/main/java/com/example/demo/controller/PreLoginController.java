@@ -1,5 +1,7 @@
 package com.example.demo.controller;
 
+import static com.example.demo.common.WebConst.AUTHENTICATION_URL;
+
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -18,5 +20,9 @@ public class PreLoginController {
 //        return token.getToken();
 		return "";
     }
+	
+
+   @RequestMapping(path = AUTHENTICATION_URL, method = RequestMethod.POST)
+   public void authentication(){}	
 	
 }
