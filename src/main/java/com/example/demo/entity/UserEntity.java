@@ -35,7 +35,7 @@ public class UserEntity implements UserDetails {
     @Column(name = "lastname")
     private String lastname;
     
-    @Column(name = "email")
+    @Column(name = "username")
     private String username;
     
 	@Column(name = "password")

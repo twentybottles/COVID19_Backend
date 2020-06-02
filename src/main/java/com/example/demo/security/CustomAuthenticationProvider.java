@@ -14,9 +14,11 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
-
 import com.example.demo.entity.UserEntity;
 import com.example.demo.service.LoginService;
+import static com.example.demo.common.WebConst.ROLE_ADMIN;
+import static com.example.demo.common.WebConst.ROLE_USER;
+
 
 @Configuration
 public class CustomAuthenticationProvider implements AuthenticationProvider {
@@ -31,16 +33,18 @@ public class CustomAuthenticationProvider implements AuthenticationProvider {
     public Authentication authenticate(Authentication authentication) throws AuthenticationException {
 		
 		List<GrantedAuthority> grantedAuths = new ArrayList<GrantedAuthority>();
-		grantedAuths.add(new SimpleGrantedAuthority("ROLE_ADMIN"));
-		grantedAuths.add(new SimpleGrantedAuthority("ROLE_USER"));
+		grantedAuths.add(new SimpleGrantedAuthority(ROLE_ADMIN));
+		grantedAuths.add(new SimpleGrantedAuthority(ROLE_USER));
 		
 		String username = authentication.getName();
 		String password = authentication.getCredentials().toString();
 				
 		UserEntity user = login.authentication(username);
+		
 		if (user == null) {
 			throw new AuthenticationCredentialsNotFoundException("User is not Authenticated");
 		}
+		
 		if (!passwordEncoder.matches(password, user.getPassword())) {
 			throw new UsernameNotFoundException("Username:" + username + " not found");
 		}
