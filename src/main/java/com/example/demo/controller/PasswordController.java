@@ -20,13 +20,13 @@ public class PasswordController {
    private PasswordRegisterService passwordRegisterService;
    
    @RequestMapping(path = PASSWORD_REGISTER_URL, method = RequestMethod.POST)
-   public boolean signupSearchUsername(@RequestBody String password, String token){
+   public boolean signupSearchUsername(@RequestBody UserEntity user){
 	   
-	   Optional<UserEntity> userEntity = passwordRegisterService.findUserByResetToken(token);
+	   Optional<UserEntity> userEntity = passwordRegisterService.findUserByResetToken(user.getResetToken());
 	   
 	   if (userEntity.isPresent()) {
 		   
-		   passwordRegisterService.register(password, token);
+		   return passwordRegisterService.register(user.getPassword(), user.getResetToken());
 	   
 	   }
 	   

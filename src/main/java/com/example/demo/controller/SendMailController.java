@@ -44,7 +44,7 @@ public class SendMailController {
 		   signupRegisterService.register(userEntity);
 		   
 //		   String appUrl = request.getScheme() + "://" + request.getServerName();
-		   String appUrl = LOCAL_HOST_3000;
+		   String appUrl = LOCAL_HOST_3000 + "/setting-password";
 		   
 			SimpleMailMessage passwordResetEmail = new SimpleMailMessage();
 			passwordResetEmail.setFrom("support@demo.com");
