@@ -2,6 +2,7 @@ package com.example.demo.entity;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Date;
 import java.util.List;
 
 import javax.persistence.Column;
@@ -43,6 +44,9 @@ public class UserEntity implements UserDetails {
 	
     @Column(name = "admin_flag")
     private boolean admin;
+    
+	@Column(name = "reset_token")
+	private String resetToken;
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {

@@ -15,17 +15,22 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.web.authentication.AbstractAuthenticationProcessingFilter;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
+import static com.example.demo.common.WebConst.AUTHENTICATION_URL;
+import static com.example.demo.common.WebConst.POST;
+import static com.example.demo.common.WebConst.USERNAME;
+import static com.example.demo.common.WebConst.PASSWORD;
+
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 public class JsonUsernamePasswordAuthenticationFilter extends AbstractAuthenticationProcessingFilter {
     ObjectMapper objectMapper = new ObjectMapper();
 
-    String usernameParameter = "username";
-    String passwordParameter = "password";
+    String usernameParameter = USERNAME;
+    String passwordParameter = PASSWORD;
 
     public JsonUsernamePasswordAuthenticationFilter(AuthenticationManager authenticationManager) {
-        super(new AntPathRequestMatcher("/authentication", "POST"));
+        super(new AntPathRequestMatcher(AUTHENTICATION_URL, POST));
         this.setAuthenticationManager(authenticationManager);
     }
 
