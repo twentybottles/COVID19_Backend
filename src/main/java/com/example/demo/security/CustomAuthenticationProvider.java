@@ -2,6 +2,7 @@ package com.example.demo.security;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
@@ -39,17 +40,21 @@ public class CustomAuthenticationProvider implements AuthenticationProvider {
 		String username = authentication.getName();
 		String password = authentication.getCredentials().toString();
 				
-		UserEntity user = login.authentication(username);
+		Optional<UserEntity> userEntity = login.authentication(username);
 		
-		if (user == null) {
+    	if (!userEntity.isPresent()) {
+    		
 			throw new AuthenticationCredentialsNotFoundException("User is not Authenticated");
-		}
-		
-		if (!passwordEncoder.matches(password, user.getPassword())) {
+    		
+    	}
+    	
+		if (!passwordEncoder.matches(password, userEntity.get().getPassword())) {
+			
 			throw new UsernameNotFoundException("Username:" + username + " not found");
+			
 		}
 				
-		return new UsernamePasswordAuthenticationToken(user, authentication.getCredentials(), grantedAuths);
+		return new UsernamePasswordAuthenticationToken(userEntity.get(), authentication.getCredentials(), grantedAuths);
 
 	}
 

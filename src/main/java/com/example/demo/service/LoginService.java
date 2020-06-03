@@ -16,14 +16,7 @@ public class LoginService {
     private UserRepository repository;
 
     @Transactional
-    public Optional<UserEntity> searchUserInfo(long id) {
-		
-		return repository.findById(id);
-		
-	}
-
-    @Transactional
-	public UserEntity authentication(String username) {
+	public Optional<UserEntity> authentication(String username) {
 						
 		return repository.findByUsername(username);
 	

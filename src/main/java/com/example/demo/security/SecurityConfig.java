@@ -19,6 +19,20 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.CorsConfigurationSource;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
+import static com.example.demo.common.WebConst.LOCAL_HOST_3000;
+import static com.example.demo.common.WebConst.LOGIN_SEARCH_INFO_URL;
+import static com.example.demo.common.WebConst.AUTHENTICATION_URL;
+import static com.example.demo.common.WebConst.LOGIN_WILDCARD_PATH;
+import static com.example.demo.common.WebConst.SIGNUP_WILDCARD_PATH;
+import static com.example.demo.common.WebConst.COVID_WILDCARD_PATH;
+import static com.example.demo.common.WebConst.USERNAME;
+import static com.example.demo.common.WebConst.PASSWORD;
+import static com.example.demo.common.WebConst.GET;
+import static com.example.demo.common.WebConst.POST;
+import static com.example.demo.common.WebConst.CONTENT_TYPE;
+import static com.example.demo.common.WebConst.USER;
+import static com.example.demo.common.WebConst.SENDMAIL_PASSWORD_URL;
+import static com.example.demo.common.WebConst.PASSWORD_REGISTER_URL;
 
 @Configuration
 @EnableWebSecurity
@@ -37,10 +51,12 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     	http
         // AUTHORIZE
         .authorizeRequests()
-        	.mvcMatchers("/authentication").hasRole("USER")
-        	.mvcMatchers("/login/search/**").permitAll()
-        	.mvcMatchers("/signup/**").permitAll()
-        	.mvcMatchers("/covid/search/**").permitAll()
+        	.mvcMatchers(AUTHENTICATION_URL).hasRole(USER)
+        	.mvcMatchers(LOGIN_WILDCARD_PATH).permitAll()
+        	.mvcMatchers(SIGNUP_WILDCARD_PATH).permitAll()
+        	.mvcMatchers(COVID_WILDCARD_PATH).permitAll()
+        	.mvcMatchers(SENDMAIL_PASSWORD_URL).permitAll()
+        	.mvcMatchers(PASSWORD_REGISTER_URL).permitAll()
             .anyRequest().authenticated()
 //        .csrf().ignoringAntMatchers("/login").csrfTokenRepository(new CookieCsrfTokenRepository())
             .and() 
@@ -49,14 +65,14 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         ;
     	
     	SavedRequestAwareAuthenticationSuccessHandler successHandler = new SavedRequestAwareAuthenticationSuccessHandler();
-    	successHandler.setTargetUrlParameter("/login/search/id");
-    	successHandler.setDefaultTargetUrl("/login/search/id");
+    	successHandler.setTargetUrlParameter(LOGIN_SEARCH_INFO_URL);
+    	successHandler.setDefaultTargetUrl(LOGIN_SEARCH_INFO_URL);
     	successHandler.setAlwaysUseDefaultTargetUrl(true);
 
         JsonUsernamePasswordAuthenticationFilter jsonUsernamePasswordAuthenticationFilter =
             new JsonUsernamePasswordAuthenticationFilter(authenticationManager());
-        jsonUsernamePasswordAuthenticationFilter.setUsernameParameter("username");
-        jsonUsernamePasswordAuthenticationFilter.setPasswordParameter("password");
+        jsonUsernamePasswordAuthenticationFilter.setUsernameParameter(USERNAME);
+        jsonUsernamePasswordAuthenticationFilter.setPasswordParameter(PASSWORD);
         jsonUsernamePasswordAuthenticationFilter
         	.setAuthenticationSuccessHandler((req, res, auth) -> {res.setStatus(HttpServletResponse.SC_OK);});
         jsonUsernamePasswordAuthenticationFilter
@@ -72,9 +88,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     private CorsConfigurationSource corsConfigurationSource() {
     	
         CorsConfiguration corsConfiguration = new CorsConfiguration();
-        corsConfiguration.setAllowedOrigins(Arrays.asList("http://localhost:3000"));
-		corsConfiguration.setAllowedMethods(Arrays.asList("GET","POST"));
-		corsConfiguration.setAllowedHeaders(Arrays.asList("Content-Type"));
+        corsConfiguration.setAllowedOrigins(Arrays.asList(LOCAL_HOST_3000));
+		corsConfiguration.setAllowedMethods(Arrays.asList(GET,POST));
+		corsConfiguration.setAllowedHeaders(Arrays.asList(CONTENT_TYPE));
 		corsConfiguration.setAllowCredentials(true);
         UrlBasedCorsConfigurationSource corsSource = new UrlBasedCorsConfigurationSource();
         corsSource.registerCorsConfiguration("/**", corsConfiguration);
@@ -84,7 +100,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     
     @Bean
     PasswordEncoder passwordEncoder() {
+    	
         return new BCryptPasswordEncoder();
+    
     }
 
 }

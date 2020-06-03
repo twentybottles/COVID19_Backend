@@ -1,6 +1,6 @@
 package com.example.demo.repository;
 
-import java.util.List;
+import java.util.Optional;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
@@ -12,7 +12,9 @@ import com.example.demo.entity.UserEntity;
 @Repository
 public interface UserRepository extends JpaRepository<UserEntity, Long> {
 	
-	public UserEntity findByUsername(String username);
+	public Optional<UserEntity> findByUsername(String username);
+	
+	public Optional<UserEntity> findByResetToken(String resetToken);
 	
 	public boolean existsByUsername(String username);
 	

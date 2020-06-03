@@ -17,7 +17,9 @@ public class ApiExceptionHandler extends ResponseEntityExceptionHandler {
 	@ExceptionHandler(Exception.class)
     public ResponseEntity<Object> handleAllException(Exception ex, WebRequest request) {
 		
-        return super.handleExceptionInternal(ex, "HandleAllException", null, HttpStatus.INTERNAL_SERVER_ERROR, request);
+    	log.error(ex.getCause().getMessage());
+
+    	return super.handleExceptionInternal(ex, "HandleAllException", null, HttpStatus.INTERNAL_SERVER_ERROR, request);
         
     }
 
