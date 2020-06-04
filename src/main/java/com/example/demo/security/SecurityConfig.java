@@ -40,7 +40,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     public void configure(WebSecurity web) throws Exception {
+    	
         web.ignoring().antMatchers("/favicon.ico", "/css/**", "/js/**", "/images/**", "/fonts/**", "/shutdown" /* for Demo */);
+    
     }
 
     @Override
@@ -52,7 +54,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         // AUTHORIZE
         .authorizeRequests()
         	.mvcMatchers(AUTHENTICATION_URL).hasRole(USER)
-        	.mvcMatchers(LOGIN_WILDCARD_PATH).permitAll()
+        	.mvcMatchers(LOGIN_WILDCARD_PATH).hasRole(USER)
         	.mvcMatchers(SIGNUP_WILDCARD_PATH).permitAll()
         	.mvcMatchers(COVID_WILDCARD_PATH).permitAll()
         	.mvcMatchers(SENDMAIL_PASSWORD_URL).permitAll()
