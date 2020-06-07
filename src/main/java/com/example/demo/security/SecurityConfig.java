@@ -32,6 +32,8 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.authentication.HttpStatusEntryPoint;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+import org.springframework.security.web.csrf.CookieCsrfTokenRepository;
+import org.springframework.security.web.csrf.CsrfFilter;
 import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.CorsConfigurationSource;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
@@ -53,8 +55,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
     	
-    	http.csrf().disable();
-
     	http
         .authorizeRequests()
     		.mvcMatchers(AUTHENTICATION_URL).hasRole(USER)
@@ -66,13 +66,12 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         	.mvcMatchers(PASSWORD_REGISTER_URL).permitAll()
             .anyRequest().authenticated()
             .and()
-//        .csrf()
-//        	.ignoringAntMatchers("/createCsrfToken")
-//        	.csrfTokenRepository(CookieCsrfTokenRepository.withHttpOnlyFalse())
-//        	.and()
+        .csrf()
+        	.ignoringAntMatchers(PRE_LOGIN_URL)
+        	.csrfTokenRepository(CookieCsrfTokenRepository.withHttpOnlyFalse())
+        	.and()
           .logout()
             .logoutUrl(LOGOUT_URL)
-//            .logoutSuccessUrl("/auth/")
             .addLogoutHandler(customLogoutHandler)
             .invalidateHttpSession(true)
             .deleteCookies("JSESSIONID", "SESSION", "remember-me")
@@ -94,7 +93,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         http.exceptionHandling().authenticationEntryPoint(new HttpStatusEntryPoint(HttpStatus.UNAUTHORIZED));
         http.exceptionHandling().accessDeniedHandler((req, res, ex) -> res.setStatus(HttpServletResponse.SC_FORBIDDEN));
   
-//    	http.addFilterAfter(new CsrfCookieFilter(), CsrfFilter.class);
+    	http.addFilterBefore(new CsrfCookieFilter(), CsrfFilter.class);
 
     }
     
