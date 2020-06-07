@@ -3,10 +3,14 @@ package com.example.demo.common;
 public interface WebConst {
 	
     /** ---- Function URLs ---- **/
+	
+	String PRE_LOGIN_URL = "/preLogin";
 
 	String AUTHENTICATION_URL = "/authentication";
 
 	String LOGIN_SEARCH_INFO_URL = "/login/search/userInfo";
+
+	String LOGOUT_URL = "/logout";
 
     String SIGNUP_SEARCH_USERNAME_URL = "/signup/search/username";
 

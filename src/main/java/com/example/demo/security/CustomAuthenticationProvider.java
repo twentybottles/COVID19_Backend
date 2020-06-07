@@ -1,5 +1,8 @@
 package com.example.demo.security;
 
+import static com.example.demo.common.WebConst.ROLE_ADMIN;
+import static com.example.demo.common.WebConst.ROLE_USER;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -15,17 +18,20 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import com.example.demo.entity.UserEntity;
-import com.example.demo.service.LoginService;
-import static com.example.demo.common.WebConst.ROLE_ADMIN;
-import static com.example.demo.common.WebConst.ROLE_USER;
 
+import com.example.demo.entity.UserEntity;
+import com.example.demo.repository.UserRepository;
 
 @Configuration
 public class CustomAuthenticationProvider implements AuthenticationProvider {
 		   
-	@Autowired
-	private LoginService login;
+  private final UserRepository userRepository;
+
+  public CustomAuthenticationProvider(UserRepository userRepository) {
+
+	  this.userRepository = userRepository;
+  
+  }
 	
     @Autowired
     PasswordEncoder passwordEncoder;
@@ -40,21 +46,21 @@ public class CustomAuthenticationProvider implements AuthenticationProvider {
 		String username = authentication.getName();
 		String password = authentication.getCredentials().toString();
 				
-		Optional<UserEntity> userEntity = login.authentication(username);
+		Optional<UserEntity> userEntity = userRepository.findByUsername(username);
 		
     	if (!userEntity.isPresent()) {
     		
 			throw new AuthenticationCredentialsNotFoundException("User is not Authenticated");
     		
     	}
-    	
-		if (!passwordEncoder.matches(password, userEntity.get().getPassword())) {
+    		
+		if (password.equals(userEntity.get().getPassword()) || passwordEncoder.matches(password, userEntity.get().getPassword())) {
 			
-			throw new UsernameNotFoundException("Username:" + username + " not found");
+			return new UsernamePasswordAuthenticationToken(userEntity.get(), userEntity.get().getPassword(), grantedAuths);
 			
 		}
-				
-		return new UsernamePasswordAuthenticationToken(userEntity.get(), authentication.getCredentials(), grantedAuths);
+		
+		throw new UsernameNotFoundException("Username:" + username + " not found");
 
 	}
 

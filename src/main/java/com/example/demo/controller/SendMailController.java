@@ -1,5 +1,8 @@
 package com.example.demo.controller;
 
+import static com.example.demo.common.WebConst.LOCAL_HOST_3000;
+import static com.example.demo.common.WebConst.SENDMAIL_PASSWORD_URL;
+
 import java.util.Optional;
 import java.util.UUID;
 
@@ -16,8 +19,6 @@ import com.example.demo.entity.UserEntity;
 import com.example.demo.service.EmailServiceImpl;
 import com.example.demo.service.PasswordRegisterService;
 import com.example.demo.service.SignupRegisterService;
-import static com.example.demo.common.WebConst.SENDMAIL_PASSWORD_URL;
-import static com.example.demo.common.WebConst.LOCAL_HOST_3000;
 
 @RestController
 public class SendMailController {
