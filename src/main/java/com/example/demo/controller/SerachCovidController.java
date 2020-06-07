@@ -15,22 +15,22 @@ import com.example.demo.service.SearchCovidService;
 
 @RestController
 public class SerachCovidController {
-	
-   @Autowired
-   private SearchCovidService searchCovid;
-   
-   @RequestMapping(path = COVID_SEARCH_SUMMARY_URL, method = RequestMethod.GET)
-   public CovidSummaryEntity searchCovidSummary(){
-       
-	   return searchCovid.searchCovidSummary();
 
-   }
-   
-   @RequestMapping(path = COVID_SEARCH_COUNTRY_URL, method = RequestMethod.GET)
-   public CovidCountryEntity[] searchCovidCountry(@RequestParam(value = "countrySlug") String countrySlug){
-       
-	   return searchCovid.searchCovidCountry(countrySlug);
+	@Autowired
+	private SearchCovidService searchCovid;
 
-   }
-   
+	@RequestMapping(path = COVID_SEARCH_SUMMARY_URL, method = RequestMethod.GET)
+	public CovidSummaryEntity searchCovidSummary() {
+
+		return searchCovid.searchCovidSummary();
+
+	}
+
+	@RequestMapping(path = COVID_SEARCH_COUNTRY_URL, method = RequestMethod.GET)
+	public CovidCountryEntity[] searchCovidCountry(@RequestParam(value = "countrySlug") String countrySlug) {
+
+		return searchCovid.searchCovidCountry(countrySlug);
+
+	}
+
 }

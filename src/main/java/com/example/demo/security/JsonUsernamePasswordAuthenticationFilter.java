@@ -1,5 +1,10 @@
 package com.example.demo.security;
 
+import static com.example.demo.common.WebConst.AUTHENTICATION_URL;
+import static com.example.demo.common.WebConst.PASSWORD;
+import static com.example.demo.common.WebConst.POST;
+import static com.example.demo.common.WebConst.USERNAME;
+
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
@@ -15,11 +20,6 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.web.authentication.AbstractAuthenticationProcessingFilter;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
-import static com.example.demo.common.WebConst.AUTHENTICATION_URL;
-import static com.example.demo.common.WebConst.POST;
-import static com.example.demo.common.WebConst.USERNAME;
-import static com.example.demo.common.WebConst.PASSWORD;
-
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 
