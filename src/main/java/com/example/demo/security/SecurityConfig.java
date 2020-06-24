@@ -86,7 +86,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         jsonUsernamePasswordAuthenticationFilter.setUsernameParameter(USERNAME);
         jsonUsernamePasswordAuthenticationFilter.setPasswordParameter(PASSWORD);
         jsonUsernamePasswordAuthenticationFilter
-        	.setAuthenticationSuccessHandler((req, res, auth) -> {res.setStatus(HttpServletResponse.SC_OK);});
+        	.setAuthenticationSuccessHandler((req, res, auth) -> res.setStatus(HttpServletResponse.SC_OK));
         jsonUsernamePasswordAuthenticationFilter
             .setAuthenticationFailureHandler((req, res, ex) -> res.setStatus(HttpServletResponse.SC_UNAUTHORIZED));
         http.addFilterAt(jsonUsernamePasswordAuthenticationFilter, UsernamePasswordAuthenticationFilter.class);
@@ -100,7 +100,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     private CorsConfigurationSource corsConfigurationSource() {
     	
         CorsConfiguration corsConfiguration = new CorsConfiguration();
-        corsConfiguration.setAllowedOrigins(Arrays.asList(LOCAL_HOST_3000));
+        corsConfiguration.setAllowedOrigins(Arrays.asList("http://3.20.220.91:3000",LOCAL_HOST_3000));
 		corsConfiguration.setAllowedMethods(Arrays.asList(GET,POST));
 		corsConfiguration.setAllowedHeaders(Arrays.asList(CorsConfiguration.ALL));
 		corsConfiguration.setAllowCredentials(true);
