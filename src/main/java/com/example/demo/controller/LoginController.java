@@ -28,6 +28,8 @@ public class LoginController {
 
 	@RequestMapping(path = AUTHENTICATION_URL, method = RequestMethod.POST)
 	public void authentication() {
+		
+		// write your code
 	
 	}
 
