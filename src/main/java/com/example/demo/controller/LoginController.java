@@ -23,6 +23,8 @@ public class LoginController {
 		CsrfToken token = (CsrfToken) request.getAttribute(CsrfToken.class.getName());
 	    
 		return "".equals(token.getToken()) ? false : true;
+		
+		// aaa
 	
 	}
 
