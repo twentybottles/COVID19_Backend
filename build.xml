@@ -9,6 +9,9 @@
     <property name="debuglevel" value="source,lines,vars"/>
     <property name="target" value="1.8"/>
     <property name="source" value="1.8"/>
+    <property name="build.dest" value="./build/libs"/>
+	<property name="build.jar" value="COVID19_Backend-0.0.1-SNAPSHOT.jar"/>
+              	
     <path id="プロジェクトと外部の依存関係.libraryclasspath">
         <pathelement location="../../../.gradle/caches/modules-2/files-2.1/org.springframework.boot/spring-boot-starter-data-jpa/2.2.4.RELEASE/374fc811a6e64632593cae83fe6786b1b93b574/spring-boot-starter-data-jpa-2.2.4.RELEASE.jar"/>
         <pathelement location="../../../.gradle/caches/modules-2/files-2.1/org.springframework.boot/spring-boot-starter-security/2.2.4.RELEASE/6ae84ac22148368eca716c64424e2f5d9db7a156/spring-boot-starter-security-2.2.4.RELEASE.jar"/>
@@ -93,13 +96,11 @@
         <mkdir dir="bin/main"/>
         <copy includeemptydirs="false" todir="bin/main">
             <fileset dir="src/main/java">
-                <exclude name="**/*.launch"/>
                 <exclude name="**/*.java"/>
             </fileset>
         </copy>
         <copy includeemptydirs="false" todir="bin/main">
             <fileset dir="src/main/resources">
-                <exclude name="**/*.launch"/>
                 <exclude name="**/*.java"/>
             </fileset>
         </copy>
@@ -132,4 +133,11 @@
         <property name="build.compiler" value="org.eclipse.jdt.core.JDTCompilerAdapter"/>
         <antcall target="build"/>
     </target>
+ <!-- jarファイル作成 -->
+  <target name="jar" depends="build-eclipse-compiler">
+    <jar
+          jarfile="${build.jar}"
+          basedir="build/libs">
+    </jar>
+  </target>
 </project>

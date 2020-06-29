@@ -51,7 +51,7 @@ public class SendMailController {
 			SimpleMailMessage passwordResetEmail = new SimpleMailMessage();
 			passwordResetEmail.setFrom("covid19hostman@gmail.com");
 			passwordResetEmail.setTo(userEntity.getUsername());
-			passwordResetEmail.setSubject("Covid19.com：Password Reset Request");
+			passwordResetEmail.setSubject("Covid19.com:Password Reset Request");
 			passwordResetEmail.setText("To reset your password, click the link below:\n" + appUrl + "/reset?token=" + userEntity.getResetToken());
 			
 			emailServiceImpl.sendEmail(passwordResetEmail);		   
