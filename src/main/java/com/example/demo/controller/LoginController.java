@@ -22,7 +22,7 @@ public class LoginController {
 	
 		CsrfToken token = (CsrfToken) request.getAttribute(CsrfToken.class.getName());
 		
-		String ddd = "cc";
+		String ddd = "cc"
 	    
 		return "".equals(token.getToken()) ? false : true;
 		
