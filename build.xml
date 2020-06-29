@@ -3,7 +3,7 @@
               Any modifications will be overwritten.
               To include a user specific buildfile here, simply create one in the same
               directory with the processing instruction <?eclipse.ant.import?>
-              as the first entry and export the buildfile again. --><project basedir="." default="" name="COVID19_Backend">
+              as the first entry and export the buildfile again. --><project basedir="." default="build" name="COVID19_Backend">
     <property environment="env"/>
     <property name="ECLIPSE_HOME" value="../../../../../Applications/STS.app/Contents/Eclipse/"/>
     <property name="debuglevel" value="source,lines,vars"/>
@@ -13,6 +13,7 @@
 	<property name="build.jar" value="COVID19_Backend-0.0.1-SNAPSHOT.jar"/>
               	
     <path id="プロジェクトと外部の依存関係.libraryclasspath">
+    	<pathelement location="COVID19_Backend-0.0.1-SNAPSHOT.jar"/>
         <pathelement location="../../../.gradle/caches/modules-2/files-2.1/org.springframework.boot/spring-boot-starter-data-jpa/2.2.4.RELEASE/374fc811a6e64632593cae83fe6786b1b93b574/spring-boot-starter-data-jpa-2.2.4.RELEASE.jar"/>
         <pathelement location="../../../.gradle/caches/modules-2/files-2.1/org.springframework.boot/spring-boot-starter-security/2.2.4.RELEASE/6ae84ac22148368eca716c64424e2f5d9db7a156/spring-boot-starter-security-2.2.4.RELEASE.jar"/>
         <pathelement location="../../../.gradle/caches/modules-2/files-2.1/org.projectlombok/lombok/1.18.12/48e4e5d60309ebd833bc528dcf77668eab3cd72c/lombok-1.18.12.jar"/>
@@ -105,11 +106,22 @@
             </fileset>
         </copy>
     </target>
-    <target depends="init" name="clean">
+    <target name="clean">
         <delete dir="bin/main"/>
     </target>
     <target depends="clean" name="cleanall"/>
-    <target depends="cleanall" name="init-eclipse-compiler" description="copy Eclipse compiler jars to ant lib directory">
+    <target depends="build-subprojects,build-project" name="build"/>
+    <target name="build-subprojects"/>
+    <target depends="init" name="build-project">
+        <echo message="${ant.project.name}: ${ant.file}"/>
+        <javac debug="true" debuglevel="${debuglevel}" destdir="bin/main" includeantruntime="false" source="${source}" target="${target}">
+            <src path="src/main/java"/>
+            <src path="src/main/resources"/>
+            <classpath refid="COVID19_Backend.classpath"/>
+        </javac>
+    </target>
+    <target description="Build all projects which reference this project. Useful to propagate changes." name="build-refprojects"/>
+    <target description="copy Eclipse compiler jars to ant lib directory" name="init-eclipse-compiler">
         <copy todir="${ant.library.dir}">
             <fileset dir="${ECLIPSE_HOME}/plugins" includes="org.eclipse.jdt.core_*.jar"/>
         </copy>
@@ -120,12 +132,13 @@
     </target>
     <target description="compile project with Eclipse compiler" name="build-eclipse-compiler">
         <property name="build.compiler" value="org.eclipse.jdt.core.JDTCompilerAdapter"/>
+        <antcall target="build"/>
     </target>
  <!-- jarファイル作成 -->
   <target name="jar" depends="build-eclipse-compiler">
     <jar
           jarfile="${build.jar}"
-          basedir="build">
+          basedir="build/libs">
     </jar>
   </target>
 </project>
