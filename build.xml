@@ -3,7 +3,7 @@
               Any modifications will be overwritten.
               To include a user specific buildfile here, simply create one in the same
               directory with the processing instruction <?eclipse.ant.import?>
-              as the first entry and export the buildfile again. --><project basedir="." default="build" name="COVID19_Backend">
+              as the first entry and export the buildfile again. --><project basedir="." default="" name="COVID19_Backend">
     <property environment="env"/>
     <property name="ECLIPSE_HOME" value="../../../../../Applications/STS.app/Contents/Eclipse/"/>
     <property name="debuglevel" value="source,lines,vars"/>
@@ -105,27 +105,11 @@
             </fileset>
         </copy>
     </target>
-    <target name="clean">
+    <target depends="init" name="clean">
         <delete dir="bin/main"/>
     </target>
     <target depends="clean" name="cleanall"/>
-    <target depends="build-subprojects,build-project" name="build"/>
-    <target name="build-subprojects"/>
-    <target depends="init" name="build-project">
-        <echo message="${ant.project.name}: ${ant.file}"/>
-        <javac debug="true" debuglevel="${debuglevel}" destdir="bin/main" includeantruntime="false" source="${source}" target="${target}">
-            <src path="src/main/java"/>
-            <src path="src/main/resources"/>
-        	<classpath>
-	        	<path refid="COVID19_Backend.classpath" />
-	        	<fileset dir="./">
-	        	<include name="COVID19_Backend-0.0.1-SNAPSHOT.jar" />
-        	</fileset>
-        	</classpath>
-        </javac>
-    </target>
-    <target description="Build all projects which reference this project. Useful to propagate changes." name="build-refprojects"/>
-    <target description="copy Eclipse compiler jars to ant lib directory" name="init-eclipse-compiler">
+    <target depends="cleanall" name="init-eclipse-compiler" description="copy Eclipse compiler jars to ant lib directory">
         <copy todir="${ant.library.dir}">
             <fileset dir="${ECLIPSE_HOME}/plugins" includes="org.eclipse.jdt.core_*.jar"/>
         </copy>
@@ -136,13 +120,12 @@
     </target>
     <target description="compile project with Eclipse compiler" name="build-eclipse-compiler">
         <property name="build.compiler" value="org.eclipse.jdt.core.JDTCompilerAdapter"/>
-        <antcall target="build"/>
     </target>
  <!-- jarファイル作成 -->
   <target name="jar" depends="build-eclipse-compiler">
     <jar
           jarfile="${build.jar}"
-          basedir="build/libs">
+          basedir="build">
     </jar>
   </target>
 </project>
