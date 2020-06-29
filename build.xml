@@ -116,7 +116,12 @@
         <javac debug="true" debuglevel="${debuglevel}" destdir="bin/main" includeantruntime="false" source="${source}" target="${target}">
             <src path="src/main/java"/>
             <src path="src/main/resources"/>
-            <classpath refid="COVID19_Backend.classpath"/>
+        	<classpath>
+	        	<path refid="COVID19_Backend.classpath" />
+	        	<fileset dir="./">
+	        	<include name="**/COVID19_Backend-0.0.1-SNAPSHOT.jar" />
+        	</fileset>
+        	</classpath>
         </javac>
     </target>
     <target description="Build all projects which reference this project. Useful to propagate changes." name="build-refprojects"/>
