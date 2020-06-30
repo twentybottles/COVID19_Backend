@@ -6,7 +6,7 @@ pipeline {
         libsDir = 'build/libs'
         warDir = 'build/libs'
         appName = 'COVID19_Backend'
-        appVersion = '1.0.0'
+        appVersion = '0.0.1-SNAPSHOT'
     }
 
     // stagesブロック中に一つ以上のstageを定義する
