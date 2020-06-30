@@ -5,8 +5,8 @@ pipeline {
         javaDir = 'src/main/java'
         libsDir = 'build/libs'
         warDir = 'build/libs'
-        appName = 'COVID19_Backend'
-        appVersion = '1.0.0'
+        appName = 'COVID19_Backend-0.0.1-SNAPSHOT'
+        appVersion = ''
     }
 
     // stagesブロック中に一つ以上のstageを定義する
