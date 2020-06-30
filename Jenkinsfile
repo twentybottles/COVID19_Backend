@@ -59,7 +59,7 @@ pipeline {
                         // pmd.xmlなどのファイルから収集する場合はparserConfigurationsを指定する。
                         // なおparserConfigurationsの場合はparserNameのほかにpattern(集計対象ファイルのパス)も指定が必要
                         // パーサ名は下記プロパティファイルに定義されているものを使う
-                        // https://github.com/jenkinsci/warnings-plugin/blob/master/src/main/resources/hudson/plugins/warnings/parser/Messages.properties
+                        https://github.com/jenkinsci/warnings-plugin/blob/master/src/main/resources/hudson/plugins/warnings/parser/Messages.properties
                         consoleParsers: [
                             [parserName: 'Java Compiler (javac)'],
                         ],
@@ -68,108 +68,6 @@ pipeline {
                         usePreviousBuildAsReference: true
                     ])
                 }
-            }
-        }
-
-        stage('静的コード解析') {
-            steps {
-                // 並列処理の場合はparallelメソッドを使う
-                parallel(
-                    '静的コード解析' : {
-                        gradlew 'check -x test'
-
-                        // dirメソッドでカレントディレクトリを指定できる
-                        dir(reportDir) {
-                            step([
-                                $class: 'CheckStylePublisher',
-                                pattern: "checkstyle/*.xml"
-                            ])
-                            step([
-                                $class: 'FindBugsPublisher',
-                                pattern: "findbugs/*.xml"
-                            ])
-                            step([
-                                $class: 'PmdPublisher',
-                                pattern: "pmd/*.xml"
-                            ])
-                            step([
-                                $class: 'DryPublisher',
-                                pattern: "cpd/*.xml"
-                            ])
-
-                            archiveArtifacts "checkstyle/*.xml"
-                            archiveArtifacts "findbugs/*.xml"
-                            archiveArtifacts "pmd/*.xml"
-                            archiveArtifacts "cpd/*.xml"
-                        }
-                    },
-                    'ステップカウント': {
-                        // レポート作成
-                        // outputFileとoutputFormatを指定するとエクセルファイルも作成してくれる
-                        stepcounter outputFile: 'stepcount.xls', outputFormat: 'excel', settings: [
-                            [key:'Java', filePattern: "${javaDir}/**/*.java"],
-                            [key:'SQL', filePattern: "${resourcesDir}/**/*.sql"],
-                            [key:'HTML', filePattern: "${resourcesDir}/**/*.html"],
-                            [key:'JS', filePattern: "${resourcesDir}/**/*.js"],
-                            [key:'CSS', filePattern: "${resourcesDir}/**/*.css"]
-                        ]
-                        // 一応エクセルファイルも成果物として保存する
-                        archiveArtifacts "stepcount.xls"
-                    },
-                    'タスクスキャン': {
-                        step([
-                            $class: 'TasksPublisher',
-                            pattern: './**',
-                            // 集計対象を検索するときに大文字小文字を区別するか
-                            ignoreCase: true,
-                            // 優先度別に集計対象の文字列を指定できる
-                            // 複数指定する場合はカンマ区切りの文字列を指定する
-                            high: 'System.out.System.err',
-                            normal: 'TODO,FIXME,XXX',
-                        ])
-                    },
-                    'JavaDoc': {
-                        gradlew 'javadoc -x classes'
-                        step([
-                            $class: 'JavadocArchiver',
-                            // Javadocのindex.htmlがあるフォルダのパスを指定する
-                            javadocDir: "${javadocDir}",
-                            keepAll: true
-                        ])
-                    }
-                )
-            }
-
-            post {
-                always {
-                   // JavaDocの警告を収集
-                    step([
-                        $class: 'WarningsPublisher',
-                        consoleParsers: [
-                            [parserName: 'JavaDoc Tool']
-                        ],
-                        canComputeNew: false,
-                        canResolveRelativesPaths: false,
-                        usePreviousBuildAsReference: true
-                    ])
-                }
-            }
-        }
-
-
-        stage('テスト') {
-            steps {
-                gradlew 'test jacocoTestReport -x classes -x testClasses'
-
-                junit "${testReportDir}/*.xml"
-                archiveArtifacts "${testReportDir}/*.xml"
-
-                // カバレッジレポートを生成（テストクラスを除外）
-                step([
-                    $class: 'JacocoPublisher',
-                    execPattern: "${jacocoReportDir}/*.exec",
-                    exclusionPattern: '**/*Test.class'
-                ])
             }
         }
 
