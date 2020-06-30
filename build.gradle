@@ -4,7 +4,6 @@ plugins {
 	id 'java'
 }
 
-version = '0.0.1-SNAPSHOT'
 sourceCompatibility = '1.8'
 
 repositories {
@@ -13,7 +12,7 @@ repositories {
 
 jar {
 	baseName = 'demo'
-	version = 'COVID19_Backend-0.0.1-SNAPSHOT.jar'
+	version = 'COVID19_Backend.jar'
 }
 
 ant.importBuild('build.xml') {
