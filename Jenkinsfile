@@ -4,7 +4,6 @@ pipeline {
     environment {
         javaDir = 'src/main/java'
         libsDir = 'build/libs'
-        warDir = 'build/libs'
         appName = 'COVID19_Backend'
         appVersion = ''
     }
@@ -34,7 +33,7 @@ pipeline {
             }
         }
 
-        stage('コンパイル') {
+        stage('Compile') {
             steps {
                 gradlew 'classes'
             }
@@ -67,7 +66,7 @@ pipeline {
             }
         }
 
-        stage('デプロイ') {
+        stage('Deploy') {
             // whenブロックでstageを実行する条件を指定できる
             when {
                 // 静的コード解析とテスト失敗時はデプロイしない
@@ -77,7 +76,7 @@ pipeline {
             steps {
                 gradlew 'jar'
                 archiveArtifacts "${libsDir}/${appName}-${appVersion}.jar"
-                deploy warDir : libsDir, appName: appName
+                deploy libsDir : libsDir, appName: appName, appVersion: appVersion
             }
         }
     }
