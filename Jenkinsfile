@@ -8,6 +8,7 @@ pipeline {
         appName = 'COVID19_Backend'
         appVersion = ''
     }
+    
 
     // stagesブロック中に一つ以上のstageを定義する
     stages {
