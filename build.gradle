@@ -13,7 +13,7 @@ repositories {
 
 jar {
 	baseName = 'demo'
-	version = 'COVID19_Backend.jar'
+	version = 'COVID19_Backend-1.0.0.jar'
 }
 
 ant.importBuild('build.xml') {
