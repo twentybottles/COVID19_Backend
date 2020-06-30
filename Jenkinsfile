@@ -6,7 +6,7 @@ pipeline {
         libsDir = 'build/libs'
         warDir = 'build/libs'
         appName = 'COVID19_Backend'
-        appVersion = '1.0.0'
+        appVersion = ''
     }
 
     // stagesブロック中に一つ以上のstageを定義する
@@ -76,10 +76,10 @@ pipeline {
 
             steps {
                 gradlew 'jar'
-                archiveArtifacts "${libsDir}/${appName}.jar"
+                archiveArtifacts "${libsDir}/${appName}-${appVersion}.jar"
                 gradlew 'war'
-                archiveArtifacts "${libsDir}/${appName}.war"
-                deploy warDir: libsDir, appName: appName
+                archiveArtifacts "${libsDir}/${appName}-${appVersion}.war"
+                deploy warDir: libsDir, appName: appName, appVersion: appVersion
             }
         }
     }
@@ -130,7 +130,7 @@ def deploy(Map args) {
     def webServerUser = 'hoge-user'
     def webServer = "${webServerUser}@${webServerAddress}"
 
-    def srcWar = "${args.appName}.war"
+    def srcWar = "${args.appName}-${args.appVersion}.war"
     def destWar = "${args.appName}.war"
 
     // ファイル転送してTomcatのwebappsにwarを配置する
