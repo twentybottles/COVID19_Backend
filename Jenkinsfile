@@ -77,7 +77,7 @@ pipeline {
             steps {
                 gradlew 'jar'
                 archiveArtifacts "${libsDir}/${appName}-${appVersion}.jar"
-                deploy : libsDir, appName: appName
+                deploy warDir : libsDir, appName: appName
             }
         }
     }
