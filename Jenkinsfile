@@ -94,9 +94,9 @@ pipeline {
         // 連続で成功しているとき以外は自分宛にメールを送信
 
         // 結果が前回と変わった時
-        changed {
-            sendMail("${currentBuild.previousBuild.result} => ${currentBuild.currentResult}")
-        }
+        //changed {
+        //    sendMail("${currentBuild.previousBuild.result} => ${currentBuild.currentResult}")
+        //}
         // 失敗した時
         failure {
             sendMail(currentBuild.currentResult)
