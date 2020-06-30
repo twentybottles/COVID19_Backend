@@ -3,7 +3,7 @@ pipeline {
     // 定数や変数を定義する
     environment {
         javaDir = 'src/main/java'
-        libsDir = 'build'
+        libsDir = 'build/libs'
         appName = 'COVID19_Backend'
         appVersion = '1.0.0'
     }
