@@ -98,13 +98,13 @@ pipeline {
         //    sendMail("${currentBuild.previousBuild.result} => ${currentBuild.currentResult}")
         //}
         // 失敗した時
-        failure {
-            sendMail(currentBuild.currentResult)
-        }
+        //failure {
+        //    sendMail(currentBuild.currentResult)
+        //}
         // 不安定な時（主にテスト失敗時）
-        unstable {
-            sendMail(currentBuild.currentResult)
-        }
+        //unstable {
+        //    sendMail(currentBuild.currentResult)
+        //}
     }
 }
 
