@@ -6,7 +6,7 @@ pipeline {
         libsDir = 'build/libs'
         warDir = 'build/libs'
         appName = 'COVID19_Backend'
-        appVersion = ''
+        appVersion = '1.0.0'
     }
 
     // stagesブロック中に一つ以上のstageを定義する
@@ -76,9 +76,9 @@ pipeline {
 
             steps {
                 gradlew 'jar'
-                archiveArtifacts "${libsDir}/${appName}-${appVersion}.jar"
+                archiveArtifacts "${libsDir}/${appName}.jar"
                 gradlew 'war'
-                archiveArtifacts "${libsDir}/${appName}-${appVersion}.war"
+                archiveArtifacts "${libsDir}/${appName}.war"
                 deploy warDir: libsDir, appName: appName, appVersion: appVersion
             }
         }
