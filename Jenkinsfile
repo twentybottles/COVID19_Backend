@@ -66,6 +66,10 @@ pipeline {
             }
         }
 
+        stage('Gradle build') {
+            def buildInfo = rtGradle.run rootDir: "gradle-examples/4/gradle-example-ci-server/", buildFile: 'build.gradle', tasks: 'clean artifactoryPublish'
+        }
+
         stage('デプロイ') {
             // whenブロックでstageを実行する条件を指定できる
             when {
