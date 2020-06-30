@@ -108,7 +108,7 @@ def gradlew(command) {
 // args.appVersion アプリのバージョン
 def deploy(Map args) {
     // 秘密鍵のパス ※Tomcatサーバにファイル転送するので事前にJenkinsサーバのどこかに秘密鍵を格納しておく必要がある
-    echo "riki riki riki"
+    echo "riki riki riki riki"
     def keyDir = '/var/lib/jenkins/.ssh/xxx'
     // Tomcatサーバのアドレスとユーザ名
     def webServerAddress = 'ecX-XX-XXX-X-X.xx-xxxx-x.xxxxxxxx'
