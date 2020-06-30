@@ -2,12 +2,7 @@ pipeline {
     agent any
     // 定数や変数を定義する
     environment {
-        reportDir = 'build/reports'
         javaDir = 'src/main/java'
-        resourcesDir = 'src/main/resources'
-        testReportDir = 'build/test-results/test'
-        jacocoReportDir = 'build/jacoco' 
-        javadocDir = 'build/docs/javadoc'
         libsDir = 'build/libs'
         appName = 'SampleApp'
         appVersion = '1.0.0'
@@ -59,7 +54,7 @@ pipeline {
                         // pmd.xmlなどのファイルから収集する場合はparserConfigurationsを指定する。
                         // なおparserConfigurationsの場合はparserNameのほかにpattern(集計対象ファイルのパス)も指定が必要
                         // パーサ名は下記プロパティファイルに定義されているものを使う
-                        https://github.com/jenkinsci/warnings-plugin/blob/master/src/main/resources/hudson/plugins/warnings/parser/Messages.properties
+                        //https://github.com/jenkinsci/warnings-plugin/blob/master/src/main/resources/hudson/plugins/warnings/parser/Messages.properties
                         consoleParsers: [
                             [parserName: 'Java Compiler (javac)'],
                         ],
