@@ -4,6 +4,7 @@ pipeline {
     environment {
         javaDir = 'src/main/java'
         libsDir = 'build/libs'
+        warDir = 'build/libs'
         appName = 'COVID19_Backend'
         appVersion = '1.0.0'
     }
