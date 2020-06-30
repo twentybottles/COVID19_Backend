@@ -40,7 +40,7 @@ pipeline {
 
         stage('コンパイル') {
             steps {
-                gradlew 'classes testClasses'
+                gradlew 'classes'
             }
 
             // postブロックでstepsブロックの後に実行される処理が定義できる
