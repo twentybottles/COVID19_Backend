@@ -79,7 +79,7 @@ pipeline {
                 archiveArtifacts "${libsDir}/${appName}-${appVersion}.jar"
                 gradlew 'war'
                 archiveArtifacts "${libsDir}/${appName}-${appVersion}.war"
-                deploy warDir: libsDir, appName: appName, appVersion: appVersion
+                deploy warDir: libsDir, appName: appName
             }
         }
     }
