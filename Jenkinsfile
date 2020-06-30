@@ -79,7 +79,7 @@ pipeline {
                 archiveArtifacts "${libsDir}/${appName}.jar"
                 gradlew 'war'
                 archiveArtifacts "${libsDir}/${appName}.war"
-                deploy warDir: libsDir, appName: appName, appVersion: appVersion
+                deploy warDir: libsDir, appName: appName
             }
         }
     }
@@ -130,7 +130,7 @@ def deploy(Map args) {
     def webServerUser = 'hoge-user'
     def webServer = "${webServerUser}@${webServerAddress}"
 
-    def srcWar = "${args.appName}-${args.appVersion}.war"
+    def srcWar = "${args.appName}.war"
     def destWar = "${args.appName}.war"
 
     // ファイル転送してTomcatのwebappsにwarを配置する
