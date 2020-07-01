@@ -118,5 +118,6 @@ def deploy(Map args) {
 
     // ファイル転送してTomcatのwebappsにwarを配置する
     sh "sudo -S scp -i ${keyDir} ./${args.libsDir}/${srcJar} ${webServer}"
-    sh "sudo -S ssh -i ${keyDir} ${webServer} \"sudo cp ${srcJar} ${destJar}\""
+//    sh "sudo -S ssh -i ${keyDir} ${webServer} \"sudo cp ${srcJar} ${destJar}\""
+    sh "sudo -S ssh -i ${keyDir} ${webServer}"
 }
