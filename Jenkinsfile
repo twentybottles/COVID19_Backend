@@ -5,7 +5,7 @@ pipeline {
         javaDir = 'src/main/java'
         libsDir = 'build/libs'
         appName = 'COVID19_Backend'
-        appVersion = ''
+        appVersion = '1.0.0'
     }
 
     // stagesブロック中に一つ以上のstageを定義する
@@ -35,7 +35,7 @@ pipeline {
 
         stage('Compile') {
             steps {
-                gradlew 'classes'
+                gradlew 'clean build'
             }
 
             // postブロックでstepsブロックの後に実行される処理が定義できる
