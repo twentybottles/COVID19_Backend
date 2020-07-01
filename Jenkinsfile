@@ -107,7 +107,7 @@ def gradlew(command) {
 // args.appVersion アプリのバージョン
 def deploy(Map args) {
     // 秘密鍵のパス ※Tomcatサーバにファイル転送するので事前にJenkinsサーバのどこかに秘密鍵を格納しておく必要がある
-    def keyDir = '/Users/riki/.ssh'
+    def keyDir = '/Users/riki/.ssh/covid19.com_backend.pem'
     // Tomcatサーバのアドレスとユーザ名
     def webServerAddress = 'ec2-3-20-220-91.us-east-2.compute.amazonaws.com'
     def webServerUser = 'ec2-user'
@@ -118,5 +118,5 @@ def deploy(Map args) {
 
     // ファイル転送してTomcatのwebappsにwarを配置する
     sh "sudo -S scp -i ${keyDir} ./${args.libsDir}/${srcJar} ${webServer}"
-    sh "sudo -S ssh -i ${keyDir} \"covid19.com_backend.pem\" ${webServer}"
+    sh "sudo -S ssh -i ${keyDir} ${webServer} \"sudo cp ${srcJar} ${destJar}\""
 }
