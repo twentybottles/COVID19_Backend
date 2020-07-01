@@ -88,6 +88,20 @@ pipeline {
             // 最後にワークスペースの中身を削除
             deleteDir()
         }
+        // 連続で成功しているとき以外は自分宛にメールを送信
+
+        // 結果が前回と変わった時
+        changed {
+            sendMail("${currentBuild.previousBuild.result} => ${currentBuild.currentResult}")
+        }
+        // 失敗した時
+        failure {
+            sendMail(currentBuild.currentResult)
+        }
+        // 不安定な時（主にテスト失敗時）
+        unstable {
+            sendMail(currentBuild.currentResult)
+        }
     }
 }
 
@@ -117,7 +131,14 @@ def deploy(Map args) {
     def destJar = "${args.appName}.jar"
 
     // ファイル転送してTomcatのwebappsにwarを配置する
-    sh "sudo -S scp -i ${keyDir} ./${args.libsDir}/${srcJar} ${webServer}"
-//    sh "sudo -S ssh -i ${keyDir} ${webServer} \"sudo cp ${srcJar} ${destJar}\""
-    sh "sudo -S ssh -i ${keyDir} ${webServer}"
+    sh "sudo -S scp -i ${keyDir} ./${args.libsDir}/${srcJar} ${webServer}:/home/ec2-user"
+	sh "sudo -S ssh -i ${keyDir} ${webServer} \"sudo cp /home/ec2-user/${srcWar} ${destWar}\""
+    //sh "sudo -S ssh -i ${keyDir} ${webServer}"
+}
+
+// メールをGmailに送信する
+def sendMail(result) {
+    mail to: "riki.nakajima@gmail.com",
+        subject: "${env.JOB_NAME} #${env.BUILD_NUMBER} [${result}]",
+        body: "Build URL: ${env.BUILD_URL}.\n\n"
 }
