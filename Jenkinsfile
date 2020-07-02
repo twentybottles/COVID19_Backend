@@ -93,15 +93,15 @@ pipeline {
         // 結果が前回と変わった時
         //changed {
             //sendMail("${currentBuild.previousBuild.result} => ${currentBuild.currentResult}")
-        }
+        //}
         // 失敗した時
-        failure {
+        //failure {
             //sendMail(currentBuild.currentResult)
-        }
+        //}
         // 不安定な時（主にテスト失敗時）
-        unstable {
+        //unstable {
             //sendMail(currentBuild.currentResult)
-        }
+        //}
     }
 }
 
