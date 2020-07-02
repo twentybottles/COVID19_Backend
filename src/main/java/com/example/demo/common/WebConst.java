@@ -3,8 +3,6 @@ package com.example.demo.common;
 public interface WebConst {
 	
     /** ---- Function URLs ---- **/
-	String API_URL = "/api";
-	
 	String PRE_LOGIN_URL = "/api/preLogin";
 
 	String AUTHENTICATION_URL = "/api/authentication";
@@ -37,7 +35,7 @@ public interface WebConst {
     
     /** ---- api.covid19api.com ---- **/
 
-    String COVID19_API_COM_URL = "http://www.covid19worldwide.tk";
+    String COVID19_API_COM_URL = "https://api.covid19api.com";
     
     String COVID19_API_SUMMARY_URL = COVID19_API_COM_URL + "/summary";
     
