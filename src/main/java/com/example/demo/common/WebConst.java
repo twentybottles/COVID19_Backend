@@ -11,33 +11,33 @@ public interface WebConst {
 
 	String LOGIN_SEARCH_INFO_URL = "/api/login/search/userInfo";
 
-	String LOGOUT_URL = "/logout";
+	String LOGOUT_URL = "/api/logout";
 
     String SIGNUP_SEARCH_USERNAME_URL = "/api/signup/search/username";
 
-    String SIGNUP_REGISTER_URL = "/signup/register";
+    String SIGNUP_REGISTER_URL = "/api/signup/register";
 
-    String SIGNUP_UPDATE_URL = "/signup/update";
+    String SIGNUP_UPDATE_URL = "/api/signup/update";
 
-    String COVID_SEARCH_SUMMARY_URL = "/covid/search/summary";
+    String COVID_SEARCH_SUMMARY_URL = "/api/covid/search/summary";
 
-    String COVID_SEARCH_COUNTRY_URL = "/covid/search/country";
+    String COVID_SEARCH_COUNTRY_URL = "/api/covid/search/country";
 
-    String SENDMAIL_PASSWORD_URL = "/sendMail/password";
+    String SENDMAIL_PASSWORD_URL = "/api/sendMail/password";
 
-    String PASSWORD_REGISTER_URL = "/password/register";
+    String PASSWORD_REGISTER_URL = "/api/password/register";
 
     /** ---- Function PATH WILDCARD ---- **/
 
-    String LOGIN_WILDCARD_PATH = "/login/**";
+    String LOGIN_WILDCARD_PATH = "/api/login/**";
 
-    String SIGNUP_WILDCARD_PATH = "/signup/**";
+    String SIGNUP_WILDCARD_PATH = "/api/signup/**";
  
-    String COVID_WILDCARD_PATH = "/covid/**";
+    String COVID_WILDCARD_PATH = "/api/covid/**";
     
     /** ---- api.covid19api.com ---- **/
 
-    String COVID19_API_COM_URL = "https://api.covid19api.com";
+    String COVID19_API_COM_URL = "http://www.covid19worldwide.tk";
     
     String COVID19_API_SUMMARY_URL = COVID19_API_COM_URL + "/summary";
     
