@@ -91,16 +91,16 @@ pipeline {
         // 連続で成功しているとき以外は自分宛にメールを送信
 
         // 結果が前回と変わった時
-        changed {
-            sendMail("${currentBuild.previousBuild.result} => ${currentBuild.currentResult}")
+        //changed {
+            //sendMail("${currentBuild.previousBuild.result} => ${currentBuild.currentResult}")
         }
         // 失敗した時
         failure {
-            sendMail(currentBuild.currentResult)
+            //sendMail(currentBuild.currentResult)
         }
         // 不安定な時（主にテスト失敗時）
         unstable {
-            sendMail(currentBuild.currentResult)
+            //sendMail(currentBuild.currentResult)
         }
     }
 }
@@ -137,8 +137,8 @@ def deploy(Map args) {
 }
 
 // メールをGmailに送信する
-def sendMail(result) {
-    mail to: "riki.nakajima@gmail.com",
-        subject: "${env.JOB_NAME} #${env.BUILD_NUMBER} [${result}]",
-        body: "Build URL: ${env.BUILD_URL}.\n\n"
-}
+//def sendMail(result) {
+//    mail to: "riki.nakajima@gmail.com",
+//        subject: "${env.JOB_NAME} #${env.BUILD_NUMBER} [${result}]",
+//        body: "Build URL: ${env.BUILD_URL}.\n\n"
+//}
