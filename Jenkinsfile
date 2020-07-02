@@ -131,8 +131,9 @@ def deploy(Map args) {
     def destJar = "${args.appName}.jar"
 
     // ファイル転送してTomcatのwebappsにwarを配置する
+    sh "sudo -S ssh -i ${keyDir} ${webServer} \"sudo pkill -f ${srcJar}\""
     sh "sudo -S scp -i ${keyDir} ./${args.libsDir}/${srcJar} ${webServer}:/home/ec2-user"
-	sh "sudo -S ssh -i ${keyDir} ${webServer} \"sudo chmod 700 ${srcJar};\""
+	sh "sudo -S ssh -i ${keyDir} ${webServer} \"sudo chmod 700 ${srcJar};sudo java -jar ${srcJar}\""
 }
 
 // メールをGmailに送信する
