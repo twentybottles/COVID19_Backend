@@ -100,7 +100,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     private CorsConfigurationSource corsConfigurationSource() {
     	
         CorsConfiguration corsConfiguration = new CorsConfiguration();
-        corsConfiguration.setAllowedOrigins(Arrays.asList("http://3.20.220.91",LOCAL_HOST_3000, "http://www.covid19worldwide.tk"));
+        corsConfiguration.setAllowedOrigins(Arrays.asList("http://localhost", "http://3.20.220.91",LOCAL_HOST_3000, "http://www.covid19worldwide.tk"));
 		corsConfiguration.setAllowedMethods(Arrays.asList(GET,POST));
 		corsConfiguration.setAllowedHeaders(Arrays.asList(CorsConfiguration.ALL));
 		corsConfiguration.setAllowCredentials(true);
