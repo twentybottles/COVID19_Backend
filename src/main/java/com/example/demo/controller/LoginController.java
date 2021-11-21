@@ -22,20 +22,15 @@ public class LoginController {
 	
 		CsrfToken token = (CsrfToken) request.getAttribute(CsrfToken.class.getName());
 		
-		String ddd = "cc";
-	    
 		return "".equals(token.getToken()) ? false : true;
-		
-		// aaa
 	
 	}
 
 	@RequestMapping(path = AUTHENTICATION_URL, method = RequestMethod.POST)
 	public void authentication() {
-		
-		// write your code
 	
 	}
+
 
 	@RequestMapping(path = LOGIN_SEARCH_INFO_URL, method = RequestMethod.GET)
 	public UserEntity loginSearchId(@AuthenticationPrincipal UserEntity userEntity){
